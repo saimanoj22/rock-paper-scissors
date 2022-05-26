@@ -48,9 +48,32 @@ function playRound(playerSelection, computerSelection){
     
 }
 
-function changeGameStatus(playerSelection, computerSelection){
-    let player = document.querySelector('.player-choice');
-    let computer = document.querySelector('.comp-choice');
+function updateRoundResult(playerSelection, computerSelection, result){
+    const h2 = document.querySelector('h2');
+    const h3 = document.querySelector('h3');
+    if(result === 'player'){
+        h2.textContent = "You Won!";
+        h3.textContent = toSentenceCase(playerSelection) + " beats " + toSentenceCase(computerSelection);
+        updateGameStatus(playerSelection, computerSelection);
+        playerCount += 1;
+    }
+    else if(result === 'computer'){
+        h2.textContent = "You Lose!";
+        h3.textContent = toSentenceCase(playerSelection) + " gets beaten by " + toSentenceCase(computerSelection);
+        updateGameStatus(playerSelection, computerSelection);
+        computerCount += 1;
+    }
+    else{
+        h2.textContent = "It's a Draw!";
+        h3.textContent = "Same Pinch! 😜";
+        updateGameStatus(playerSelection, computerSelection);
+
+    }
+}
+
+function updateGameStatus(playerSelection, computerSelection){
+    const player = document.querySelector('.player-choice');
+    const computer = document.querySelector('.comp-choice');
 
     // player-status
     if(playerSelection === 'rock'){
@@ -75,9 +98,9 @@ function changeGameStatus(playerSelection, computerSelection){
     }
 }
 
-function updateScores(playerCount, computerCount){
-    let player = document.querySelector('.player-score');
-    let computer = document.querySelector('.comp-score');
+function updateScores(){
+    const player = document.querySelector('.player-score');
+    const computer = document.querySelector('.comp-score');
 
     player.textContent = `Player: ${playerCount}`;
     computer.textContent = `Computer: ${computerCount}`;
@@ -85,6 +108,27 @@ function updateScores(playerCount, computerCount){
 
 function toSentenceCase(string){
     return string[0].toUpperCase() + string.substr(1).toLowerCase();
+}
+
+function gameOver(){
+    if(playerCount > computerCount){
+        document.querySelector(".overlay").style.display = "block";
+        document.querySelector('.winner').textContent = "You Won !!!";
+        playAgain();
+    }
+    else if(playerCount < computerCount){
+        document.querySelector(".overlay").style.display = "block";
+        document.querySelector('.winner').textContent = "Better Luck Next Time !!!";
+        playAgain();
+    }
+}
+
+function playAgain(){
+    const restart = document.querySelector('.restart')
+    restart.addEventListener('click', () => {
+        restartGame();
+        document.querySelector(".overlay").style.display = "none";
+    });
 }
 
 function restartGame(){
@@ -98,74 +142,23 @@ function restartGame(){
     document.querySelector('.comp-score').textContent = "Computer: 0";
 }
 
-// function gameOver(playerCount, computerCount){
-//     if(playerCount > computerCount){
-//         document.getElementById("overlay").style.display = "block";
-//         document.querySelector('winner').textContent = "You Won";
-//         let restart = document.querySelector('restart')
-//         restart.addEventListener('click', () => restartGame());
-//     }
-//     else{
-//         document.getElementById("overlay").style.display = "none";
-//         document.querySelector('winner').textContent = "Next Time";
-//         let restart = document.querySelector('restart')
-//         restart.addEventListener('click', () => restartGame());
-//     }
-// }
 
+// main
 let playerCount = 0, computerCount = 0;
-
 const buttons = document.querySelectorAll('div.choices button');
+
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-
-        //description
-        let h2 = document.querySelector('h2');
-        let h3 = document.querySelector('h3');
         
-        // check id's
+        let playerSelection = button.id;
         let computerSelection = computerPlay();
-        let result = playRound(button.id, computerSelection);
+        let result = playRound(playerSelection, computerSelection);
         
-        if(result === 'player'){
-            h2.textContent = "You Won!";
-            h3.textContent = toSentenceCase(button.id) + " beats " + toSentenceCase(computerSelection);
-            changeGameStatus(button.id, computerSelection);
-            playerCount += 1;
-        }
-        else if(result === 'computer'){
-            h2.textContent = "You Lose!";
-            h3.textContent = toSentenceCase(button.id) + " gets beaten by " + toSentenceCase(computerSelection);
-            changeGameStatus(button.id, computerSelection);
-            computerCount += 1;
-        }
-        else{
-            h2.textContent = "It's a Draw!";
-            h3.textContent = "Same Pinch! 😜";
-            changeGameStatus(button.id, computerSelection);
-
-        }
-        updateScores(playerCount, computerCount);
+        updateRoundResult(playerSelection, computerSelection, result);
+        updateScores();
 
         if(playerCount === 5 || computerCount === 5){
-            if(playerCount > computerCount){
-                document.querySelector(".overlay").style.display = "block";
-                document.querySelector('.winner').textContent = "You Won !!!";
-                let restart = document.querySelector('.restart')
-                restart.addEventListener('click', () => {
-                    restartGame();
-                    document.querySelector(".overlay").style.display = "none";
-                });
-            }
-            else if(playerCount < computerCount){
-                document.querySelector(".overlay").style.display = "block";
-                document.querySelector('.winner').textContent = "Better Luck Next Time !!!";
-                let restart = document.querySelector('.restart')
-                restart.addEventListener('click', () => {
-                    restartGame();
-                    document.querySelector(".overlay").style.display = "none";
-                });
-            }
+            gameOver();
         }
     });
 });
