@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0px;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 72px;
+    font-family: 'Cabin Sketch', cursive;
+    height: 150px;
+    background-color: #3B72FF;
+    color: white;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    background-color: #FFDA7A;
+    padding: 36px;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    background-color: #50DE89;
+    height: 100px;
+}
+
+.game-status{
+    margin: 48px;
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.player-choice, .comp-choice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    background-color: #FFDA7A;
+    font-size: 100px;
+    border-radius: 15px 15px 0px 0px;
+    border-style: solid;
+    border-color: #3B72FF;
+    border-bottom: none;
+    border-width: 5px;
+}
+
+.player-score, .comp-score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    height: 50px;
+    width: 200px;
+    background-color: #3B72FF;
+    border-radius: 0px 0px 15px 15px;
+    border-color: #3B72FF;
+    border-style: solid;
+    border-top: none;
+    border-width: 5px;
+}
+
+.rock, .paper, .scissors{
+    height: 170px;
+    width: 170px;
+    font-size: 100px;
+}
+
+.choices{
+    display: flex;
+    gap: 32px;
+}
+
+button{
+    background-color: #FFDA7A;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #3B72FF;
+    border-width: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #9bb6fb;
+}
+
+button:active{
+    background-color:#3B72FF 
+}
+
+h2, h3{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Rubik', sans-serif;
+}
+
+h2{
+    font-weight: 800;
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+h3{
+    font-weight: 300;
+    font-size: 24px;
+    text-align: center;
+}
+
+.github{
+    width:30px;
+    height:30px;
+}

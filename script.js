@@ -48,38 +48,96 @@ function playRound(playerSelection, computerSelection){
     
 }
 
-function game(){
-    alert("Total 5 rounds.");
-    let playerCount = 0, computerCount = 0;
-    for(let i = 0; i < 5; i++){
-        /*Take input from user and generate computer choice*/
-        const playerSelection = prompt("Enter your choice('Rock', 'Paper', 'Scissors'): ");
-        const computerSelection = computerPlay();
+function changeGameStatus(playerSelection, computerSelection){
+    let player = document.querySelector('.player-choice');
+    let computer = document.querySelector('.comp-choice');
 
-        /* simulate a game and take result*/
-        let result = playRound(playerSelection.toLowerCase(), computerSelection);
-        if(result === 'player'){
-            alert("You Win! " + playerSelection.toUpperCase() + " beats " + computerSelection.toUpperCase());
-            playerCount += 1;
-        }
-        else if(result === 'computer'){
-            alert("Computer Wins! " + computerSelection.toUpperCase() + " beats " + playerSelection.toUpperCase());
-            computerCount += 1;
-        }
-        else{
-            alert("It's a draw!!! You both played " + computerSelection.toUpperCase());
-        }
+    // player-status
+    if(playerSelection === 'rock'){
+        player.textContent = '🪨';
     }
-    /*Decide who wins*/
-    if(playerCount > computerCount){
-        alert("You: " + playerCount + " Computer: " + computerCount + "\nYou Win!!!");
+    else if(playerSelection === 'paper'){
+        player.textContent = '📄';
     }
-    else if(computerCount > playerCount){
-        alert("You: " + playerCount + " Computer: " + computerCount + "\nComputer wins!!! Better luck next time!!!");
+    else if(playerSelection === 'scissors'){
+        player.textContent = '✂️';
     }
-    else{
-        alert("You: " + playerCount + " Computer: " + computerCount + "\nIt's a draw!!!");
+
+    // computer-status
+    if(computerSelection === 'rock'){
+        computer.textContent = '🪨';
+    }
+    else if(computerSelection === 'paper'){
+        computer.textContent = '📄';
+    }
+    else if(computerSelection === 'scissors'){
+        computer.textContent = '✂️';
     }
 }
 
-game();
+function updateScores(playerCount, computerCount){
+    let player = document.querySelector('.player-score');
+    let computer = document.querySelector('.comp-score');
+
+    player.textContent = `Player: ${playerCount}`;
+    computer.textContent = `Computer: ${computerCount}`;
+}
+
+function toSentenceCase(string){
+    return string[0].toUpperCase() + string.substr(1).toLowerCase();
+}
+
+function restartGame(){
+    playerCount = 0;
+    computerCount = 0;
+    document.querySelector('h2').textContent = "Lets's Go! Choose One!";
+    document.querySelector('h3').textContent = "First to score 5 points wins";
+    document.querySelector('.player-choice').textContent = "";
+    document.querySelector('.comp-choice').textContent = "";
+    document.querySelector('.player-score').textContent = "Player: 0";
+    document.querySelector('.comp-score').textContent = "Computer: 0";
+}
+
+let playerCount = 0, computerCount = 0;
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+
+        //description
+        let h2 = document.querySelector('h2');
+        let h3 = document.querySelector('h3');
+        
+        // check id's
+        let computerSelection = computerPlay();
+        let result = playRound(button.id, computerSelection);
+        
+        if(result === 'player'){
+            h2.textContent = "You Won!";
+            h3.textContent = toSentenceCase(button.id) + " beats " + toSentenceCase(computerSelection);
+            changeGameStatus(button.id, computerSelection);
+            playerCount += 1;
+        }
+        else if(result === 'computer'){
+            h2.textContent = "You Lose!";
+            h3.textContent = toSentenceCase(button.id) + " gets beaten by " + toSentenceCase(computerSelection);
+            changeGameStatus(button.id, computerSelection);
+            computerCount += 1;
+        }
+        else{
+            h2.textContent = "It's a Draw!";
+            h3.textContent = "Same Pinch! 😜";
+            changeGameStatus(button.id, computerSelection);
+
+        }
+        updateScores(playerCount, computerCount);
+
+        if(playerCount === 5){
+            alert('You Won!!!');
+            restartGame();
+        }
+        else if(computerCount === 5){
+            alert('Better luck next time !!!');
+            restartGame();
+        }
+    });
+});

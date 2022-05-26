@@ -2,6 +2,43 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
+    <body>
+        <header>ROCK PAPER SCISSORS</header>
+        <main>
+            <div class="game">
+                <div class="description">
+                    <h2>Lets's Go! Choose One!</h2>
+                    <h3>First to score 5 points wins</h3>
+                </div>
+                
+                <div class="game-status">
+                    <div class="player-status">
+                        <div class="player-choice"></div>
+                        <div class="player-score">Player: 0</div>
+                    </div>
+                    <div class="comp-status">
+                        <div class="comp-choice"></div>
+                        <div class="comp-score">Computer: 0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="choices">
+                <button class="rock" id="rock">🪨</button>
+                <button class="paper" id="paper">📄</button>
+                <button class="scissors" id="scissors">✂️</button>
+            </div>
+
+        </main>
+        <footer>
+            <p>Copyright &#169 saimanoj22</p>
+            <a href="https://github.com/saimanoj22" target="_blank">
+                <img src="images/GitHub.svg" class="github" alt="GitHub logo">
+            </a>
+        </footer>
+    </body>
+    <div id="overlay"></div>
+    <script src="script.js"></script>
 </html>
