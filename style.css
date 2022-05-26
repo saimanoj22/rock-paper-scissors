@@ -137,15 +137,17 @@ h3{
     background-color: #FFDA7A;
     font-size: 36px;
     margin-top: 20px;
+    padding: 16px;
 }
 
 .win-status{
     font-size: 48px;
+    font-family: 'Times New Roman', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #50DE89;
+    background-color: rgba(241, 246, 241, 0.501);
     width: fit-content;
     padding: 50px 100px 50px 100px;
 
