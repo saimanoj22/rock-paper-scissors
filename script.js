@@ -34,7 +34,7 @@ function playRound(playerSelection, computerSelection){
             return 'draw';
         }
     }
-    else if(playerSelection === 'scissors' && computerSelection === 'paper'){
+    else if(playerSelection === 'scissors'){
         if(computerSelection === 'paper'){
             return 'player';
         }
