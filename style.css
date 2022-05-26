@@ -129,3 +129,50 @@ h3{
     width:30px;
     height:30px;
 }
+
+.restart{
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 15px;
+    background-color: #FFDA7A;
+    font-size: 36px;
+    margin-top: 20px;
+}
+
+.win-status{
+    font-size: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #50DE89;
+    width: fit-content;
+    padding: 50px 100px 50px 100px;
+
+    border-radius: 15px;
+    border-color: white;
+    border-style: solid;
+    border-width: 5px;
+}
+
+.center-win{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.overlay{
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+

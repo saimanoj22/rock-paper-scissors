@@ -98,8 +98,24 @@ function restartGame(){
     document.querySelector('.comp-score').textContent = "Computer: 0";
 }
 
+// function gameOver(playerCount, computerCount){
+//     if(playerCount > computerCount){
+//         document.getElementById("overlay").style.display = "block";
+//         document.querySelector('winner').textContent = "You Won";
+//         let restart = document.querySelector('restart')
+//         restart.addEventListener('click', () => restartGame());
+//     }
+//     else{
+//         document.getElementById("overlay").style.display = "none";
+//         document.querySelector('winner').textContent = "Next Time";
+//         let restart = document.querySelector('restart')
+//         restart.addEventListener('click', () => restartGame());
+//     }
+// }
+
 let playerCount = 0, computerCount = 0;
-const buttons = document.querySelectorAll('button');
+
+const buttons = document.querySelectorAll('div.choices button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
 
@@ -131,13 +147,25 @@ buttons.forEach((button) => {
         }
         updateScores(playerCount, computerCount);
 
-        if(playerCount === 5){
-            alert('You Won!!!');
-            restartGame();
-        }
-        else if(computerCount === 5){
-            alert('Better luck next time !!!');
-            restartGame();
+        if(playerCount === 5 || computerCount === 5){
+            if(playerCount > computerCount){
+                document.querySelector(".overlay").style.display = "block";
+                document.querySelector('.winner').textContent = "You Won !!!";
+                let restart = document.querySelector('.restart')
+                restart.addEventListener('click', () => {
+                    restartGame();
+                    document.querySelector(".overlay").style.display = "none";
+                });
+            }
+            else if(playerCount < computerCount){
+                document.querySelector(".overlay").style.display = "block";
+                document.querySelector('.winner').textContent = "Better Luck Next Time !!!";
+                let restart = document.querySelector('.restart')
+                restart.addEventListener('click', () => {
+                    restartGame();
+                    document.querySelector(".overlay").style.display = "none";
+                });
+            }
         }
     });
 });
